@@ -60,6 +60,18 @@ const getPokemonError: CaseReducer<
   ...initialState,
 });
 
+const shufflePokemon: CaseReducer<PokemonState, Action> = (state) => {
+  const { pokemon } = state;
+  // no need to return new state since we use immer
+  pokemon.sort(() => {
+    const randomNumber = Math.random();
+    if (randomNumber > 0.5) {
+      return 1;
+    }
+    return -1;
+  });
+};
+
 const issuesDisplaySlice = createSlice({
   name: 'pokemon',
   initialState,
@@ -67,6 +79,7 @@ const issuesDisplaySlice = createSlice({
     getPokemonRequest,
     getPokemonSuccess,
     getPokemonError,
+    shufflePokemon,
   },
 });
 
@@ -74,6 +87,7 @@ export const {
   getPokemonRequest: getPokemonRequestAction,
   getPokemonSuccess: getPokemonSuccessAction,
   getPokemonError: getPokemonErrorAction,
+  shufflePokemon: shufflePokemonAction,
 } = issuesDisplaySlice.actions;
 
 export default issuesDisplaySlice.reducer;
