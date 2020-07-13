@@ -42,3 +42,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Features
+
+This app loads 10 pokemons from the [Pokemon API](https://pokeapi.co/api/v2/pokemon), they appear on the screen and by clicking on the `View details` link you can view their details.
+
+On that page by clicking on the `Delete pokemon` button the pokemon is deleted from the list. When you delete all 10 of them they are reloaded again.
+
+There is a `Shuffle` button which changes the order of the items presented.
