@@ -20,11 +20,11 @@ interface PokemonPayload {
 interface Ability {
   ability: PokemonInfo;
   is_hidden: boolean;
-  slot: 1;
+  slot: number;
 }
 
 // there are more props but we will use only these
-interface PokemonDetails {
+export interface PokemonDetails {
   abilities: Array<Ability>;
   base_experience: number;
 }

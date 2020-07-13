@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Card, Button, Loader } from '@inplayer-org/inplayer-ui';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router';
 import {
   fetchPokemonDetails,
   deletePokemonAction,
@@ -14,7 +14,6 @@ const PokemonDetails = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { isLoading, pokemonDetails } = usePokemonDetailsSelector();
-
   useEffect(() => {
     dispatch(fetchPokemonDetails(pokemonName));
   }, [dispatch]);
