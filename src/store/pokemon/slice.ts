@@ -4,6 +4,9 @@ import {
   CaseReducer,
   Action,
 } from '@reduxjs/toolkit';
+import axios from 'axios';
+// eslint-disable-next-line import/no-cycle
+import { AppThunk } from '..';
 
 interface PokemonInfo {
   name: string;
@@ -47,6 +50,7 @@ const getPokemonSuccess: CaseReducer<
 > = (state, { payload: { pokemon } }) => ({
   ...state,
   pokemon,
+  isFetching: false,
 });
 
 const getPokemonError: CaseReducer<
@@ -73,3 +77,17 @@ export const {
 } = issuesDisplaySlice.actions;
 
 export default issuesDisplaySlice.reducer;
+
+export const fetchPokemon = (): AppThunk => async (dispatch) => {
+  try {
+    dispatch(getPokemonRequestAction);
+    const {
+      data: { results },
+    } = await axios.get<{ results: Array<PokemonInfo> }>(
+      'https://pokeapi.co/api/v2/pokemon?limit=10&offset=200'
+    );
+    dispatch(getPokemonSuccessAction({ pokemon: results }));
+  } catch (err) {
+    dispatch(getPokemonErrorAction(err.toString()));
+  }
+};
