@@ -2,17 +2,11 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Card, Button } from '@inplayer-org/inplayer-ui';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { fetchPokemon, shufflePokemonAction } from '../../store/pokemon/slice';
 import { useAppDispatch } from '../../store';
 import { getPokemon } from '../../store/pokemon/selectors';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem;
-`;
+import { Container } from '../../components/styled';
 
 const Heading = styled.h1`
   margin: 1rem 0;
@@ -30,7 +24,9 @@ const PokemonHome = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchPokemon());
+    if (!pokemon.length) {
+      dispatch(fetchPokemon());
+    }
   }, [dispatch]);
 
   const shuffleItems = () => {
@@ -43,7 +39,7 @@ const PokemonHome = () => {
       <PokemonContainer>
         {pokemon.map((pokemonItem) => (
           <Card key={pokemonItem.name} title={pokemonItem.name}>
-            <Button>View details</Button>
+            <NavLink to={`/details/${pokemonItem.name}`}>View details</NavLink>
           </Card>
         ))}
       </PokemonContainer>
