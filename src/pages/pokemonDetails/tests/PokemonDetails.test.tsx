@@ -2,16 +2,10 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeWrapper } from '@inplayer-org/inplayer-ui';
 import { useParams, useHistory } from 'react-router';
-import { PokemonDetails as PokemonDetailsType } from '../../../store/pokemon/slice';
 import PokemonDetails from '../PokemonDetails';
 import '@testing-library/jest-dom/extend-expect';
 import { usePokemonDetailsSelector } from '../usePokemonDetailsSelector';
 import { useAppDispatch } from '../../../store';
-
-interface UsePokemonDetailsSelector {
-  isLoading: boolean;
-  pokemonDetails: PokemonDetailsType;
-}
 
 jest.mock('../usePokemonDetailsSelector');
 jest.mock('react-router');
